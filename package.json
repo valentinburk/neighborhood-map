@@ -5,6 +5,8 @@
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-foursquare": "^1.0.3",
+    "react-geocode": "0.0.7",
     "react-google-maps": "^9.4.5",
     "react-scripts": "1.1.4"
   },

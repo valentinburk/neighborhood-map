@@ -1,9 +1,27 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import Geocode from 'react-geocode';
+
+const Foursquare = require('react-foursquare')({
+  clientID: 'DF30QCC2OFQ3EO5L2JYYYZODPV0A4MIDY10HPD0HEI20MOHB',
+  clientSecret: 'SAITGGNJVSYI5NTYUCP4P5EDH03L0BENSGIW2LVCE13YUQKL'
+});
+
+Geocode.setApiKey('AIzaSyC2eiZsx2oT_y03EA5ksk4zLCFq0mifCVM');
+
+Geocode.fromAddress("Googleplex").then(
+  geoResponse => {
+    const { lat, lng } = geoResponse.results[0].geometry.location;
+    Foursquare.venues.getVenues({
+      'll': `${lat},${lng}`,
+      'query': 'Company'
+    }).then(fsResponse => console.log(fsResponse.response.venues.splice(0, 5)));
+  }
+);
 
 const MapComponent = withScriptjs(withGoogleMap(props => (
     <GoogleMap
-      defaultZoom={10}
+      defaultZoom={12}
       defaultCenter={props.places[0]}
       >
       {props.isMarkerShown && (props.places.map((place, index) => <Marker key={index} position={place} />))}
@@ -14,7 +32,7 @@ const MapComponent = withScriptjs(withGoogleMap(props => (
 class Map extends Component {
   state = {
     places: [
-      { lat: -34.397, lng: 150.644 }
+      { lat: 37.422, lng: -122.084057 }
     ]
   }
 
