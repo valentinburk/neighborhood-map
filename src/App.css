@@ -61,6 +61,21 @@ body,
   padding: 0 20px 20px;
 }
 
+.close-window {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+  font-size: 1.5em;
+  margin: 0;
+  cursor: pointer;
+  color: #9a9a9a;
+}
+
+.info-name {
+  margin-top: 50px;
+}
+
 .info-name,
 .info-address {
   margin-bottom: 0;

@@ -13,6 +13,9 @@ class InfoWindow extends Component {
       <Draggable>
         <div className='info-window'>
           <h2 className='info-name'>{place.name}</h2>
+          <p
+            onClick={() => {this.props.hideInfoWindow()}}
+            className='close-window'>X</p>
           <p className='info-category'>{place.categories[0].name}</p>
           <p className='info-address'>{place.location.address}, {place.location.city}</p>
           <p className='info-rating'>Rating: {place.rating} ({place.likes.summary})</p>

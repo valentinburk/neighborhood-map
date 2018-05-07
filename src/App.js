@@ -69,7 +69,8 @@ class App extends Component {
           onMarkerClick={this.onMarkerClick} />
         <InfoWindow
           place={this.state.selectedPlace}
-          foursquare={FOURSQUARE} />
+          foursquare={FOURSQUARE}
+          hideInfoWindow={this.hideInfoWindow} />
       </div>
     );
   }
