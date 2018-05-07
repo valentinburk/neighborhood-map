@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Encode+Sans);
+
 html,
 body,
 #root,
@@ -5,4 +7,71 @@ body,
 .map-container {
   height: 100%;
   margin: 0;
+  font-family: 'Encode Sans', sans-serif;
+}
+
+.title {
+  color: #fff;
+  text-align: center;
+}
+
+.place-list {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  background: #3e3e3e;
+  z-index: 1;
+  overflow-y: scroll;
+}
+
+.places {
+  list-style: none;
+  padding: 0;
+}
+
+.place {
+  padding: 10px 15px;
+  color: #b9b9b9;
+}
+
+.filter-places {
+  width: 100%;
+  padding: 10px;
+  font-family: inherit;
+}
+
+.map-container {
+  margin-left: 250px;
+}
+
+.info-window {
+  position: absolute;
+  right: 100px;
+  top: 100px;
+  transform: translate(150px, 0);
+  width: 300px;
+  height: 300px;
+  background: rgb(255, 255, 255);
+  cursor: move;
+  padding: 0 20px;
+}
+
+.info-name,
+.info-address {
+  margin-bottom: 0;
+}
+
+.info-address,
+.info-category {
+  margin: 0;
+}
+
+.info-category
+{
+  color: #eee;
+  margin-bottom: 10px;
+}
+
+.info-close {
+
 }
