@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-draggable": "^3.0.5",
     "react-foursquare": "^1.0.3",
     "react-geocode": "0.0.7",
     "react-google-maps": "^9.4.5",

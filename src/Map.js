@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
-const markers = [];
-
 const MarkerComponent = (props) => {
   let marker = <Marker
     position={props.place}
-    animation={window.google.maps.Animation.BOUNCE}
+    animation={props.animation}
     onClick={() => {
       props.onClick(props.index);
     }} />
-  markers.push(marker);
+
   return marker;
 }
 
@@ -24,6 +22,8 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
         <MarkerComponent
           key={props.index}
           place={place}
+          animation={place.clicked ?
+            window.google.maps.Animation.BOUNCE : 0}
           index={index}
           onClick={props.onMarkerClick} /> ))
       }
@@ -52,8 +52,6 @@ class Map extends Component {
     } else {
       map = <div></div>
     }
-
-    console.log(markers);
 
     return map;
   }

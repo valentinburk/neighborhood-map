@@ -15,7 +15,17 @@ class App extends Component {
   }
 
   onMarkerClick = (marker) => {
+    const places = this.state.places.map((p, index) => {
+      if (index === marker) {
+        p.clicked = true;
+      } else {
+        p.clicked = false;
+      }
+      return p;
+    });
+
     this.setState({
+      places: places,
       selectedPlace: this.state.places[marker]
     });
 
@@ -23,7 +33,12 @@ class App extends Component {
   }
 
   hideInfoWindow = () => {
-    this.setState({ selectedPlace: null });
+    const places = this.state.places.map((p, index) => {
+      p.clicked = false;
+      return p;
+    });
+
+    this.setState({ places: places, selectedPlace: null });
   }
 
   render() {
@@ -34,7 +49,7 @@ class App extends Component {
           setMarkers={this.setMarkers} />
         <Map
           places={this.state.places.map(v => {
-            return { lat: v.location.lat, lng: v.location.lng }
+            return { lat: v.location.lat, lng: v.location.lng, clicked: v.clicked }
           })}
           hideInfoWindow={this.hideInfoWindow}
           onMarkerClick={this.onMarkerClick} />
