@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import escapeRegExp from 'escape-string-regexp';
 
-const Foursquare = require('react-foursquare')({
-  clientID: 'DF30QCC2OFQ3EO5L2JYYYZODPV0A4MIDY10HPD0HEI20MOHB',
-  clientSecret: 'SAITGGNJVSYI5NTYUCP4P5EDH03L0BENSGIW2LVCE13YUQKL'
-});
+
 
 Geocode.setApiKey('AIzaSyC2eiZsx2oT_y03EA5ksk4zLCFq0mifCVM');
 
@@ -19,7 +16,7 @@ class List extends Component {
     Geocode.fromAddress("Googleplex").then(
       geoResponse => {
         const { lat, lng } = geoResponse.results[0].geometry.location;
-        Foursquare.venues.getVenues({
+        this.props.foursquare.venues.getVenues({
           'll': `${lat},${lng}`,
           'categoryId': '4d4b7104d754a06370d81259'
         }).then(fsResponse => {
@@ -50,7 +47,7 @@ class List extends Component {
   }
 
   render() {
-    const { query, places } = this.state;
+    const { query } = this.state;
 
     let filteredPlaces = this.getFilteredPlaces();
 

@@ -4,10 +4,21 @@ import Map from './Map';
 import InfoWindow from './InfoWindow';
 import './App.css';
 
+const FOURSQUARE = require('react-foursquare')({
+  clientID: 'DF30QCC2OFQ3EO5L2JYYYZODPV0A4MIDY10HPD0HEI20MOHB',
+  clientSecret: 'SAITGGNJVSYI5NTYUCP4P5EDH03L0BENSGIW2LVCE13YUQKL'
+});
+
 class App extends Component {
   state = {
     places: [],
     selectedPlace: null
+  }
+
+  getInfo = (place) => {
+    return FOURSQUARE.venues.getVenue({
+      'venue_id': place.id
+    })
   }
 
   setMarkers = (places) => {
@@ -24,12 +35,13 @@ class App extends Component {
       return p;
     });
 
-    this.setState({
-      places: places,
-      selectedPlace: this.state.places[marker]
-    });
-
-    console.log(this.state.places[marker]);
+    this.getInfo(this.state.places[marker])
+      .then(fsResponse => {
+        this.setState({
+          places: places,
+          selectedPlace: fsResponse.response.venue
+        });
+      });
   }
 
   hideInfoWindow = () => {
@@ -42,10 +54,10 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className='app-container'>
         <List
+          foursquare={FOURSQUARE}
           setMarkers={this.setMarkers} />
         <Map
           places={this.state.places.map(v => {
@@ -54,7 +66,8 @@ class App extends Component {
           hideInfoWindow={this.hideInfoWindow}
           onMarkerClick={this.onMarkerClick} />
         <InfoWindow
-          place={this.state.selectedPlace}/>
+          place={this.state.selectedPlace}
+          foursquare={FOURSQUARE} />
       </div>
     );
   }

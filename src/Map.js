@@ -20,7 +20,7 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
       >
       {props.isMarkerShown && (props.places.map((place, index) =>
         <MarkerComponent
-          key={props.index}
+          key={index}
           place={place}
           animation={place.clicked ?
             window.google.maps.Animation.BOUNCE : 0}
