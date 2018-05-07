@@ -32,6 +32,12 @@ body,
 .place {
   padding: 10px 15px;
   color: #b9b9b9;
+  cursor: pointer;
+}
+
+.place:hover {
+  background-color: #fff;
+  color: #3e3e3e;
 }
 
 .filter-places {
@@ -47,7 +53,7 @@ body,
 .info-window {
   position: absolute;
   right: 100px;
-  top: 100px;
+  bottom: 50px;
   transform: translate(150px, 0);
   width: 300px;
   background: rgb(255, 255, 255);

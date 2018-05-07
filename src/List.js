@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import escapeRegExp from 'escape-string-regexp';
 
-
-
 Geocode.setApiKey('AIzaSyC2eiZsx2oT_y03EA5ksk4zLCFq0mifCVM');
 
 class List extends Component {
@@ -66,7 +64,8 @@ class List extends Component {
           {filteredPlaces.map((p, index) =>
             <li
               key={index}
-              className='place'>
+              className='place'
+              onClick={() => {this.props.onPlaceClick(index)}}>
                 {p.name}
             </li>
           )}

@@ -54,11 +54,13 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.places);
     return (
       <div className='app-container'>
         <List
           foursquare={FOURSQUARE}
-          setMarkers={this.setMarkers} />
+          setMarkers={this.setMarkers}
+          onPlaceClick={this.onMarkerClick} />
         <Map
           places={this.state.places.map(v => {
             return { lat: v.location.lat, lng: v.location.lng, clicked: v.clicked }
