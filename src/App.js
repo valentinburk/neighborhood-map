@@ -15,7 +15,10 @@ class App extends Component {
   }
 
   onMarkerClick = (marker) => {
-    this.setState({ selectedPlace: this.state.places[marker] });
+    this.setState({
+      selectedPlace: this.state.places[marker]
+    });
+
     console.log(this.state.places[marker]);
   }
 
@@ -24,6 +27,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className='app-container'>
         <List

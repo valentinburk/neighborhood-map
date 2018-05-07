@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
+const markers = [];
+
+const MarkerComponent = (props) => {
+  let marker = <Marker
+    position={props.place}
+    animation={window.google.maps.Animation.BOUNCE}
+    onClick={() => {
+      props.onClick(props.index);
+    }} />
+  markers.push(marker);
+  return marker;
+}
+
 const MapComponent = withScriptjs(withGoogleMap(props => {
     return <GoogleMap
       defaultZoom={10}
@@ -8,23 +21,21 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
       onClick={props.hideInfoWindow}
       >
       {props.isMarkerShown && (props.places.map((place, index) =>
-        <div
-          key={index}>
-            <Marker
-              position={place}
-              defaultAnimation={window.google.maps.Animation.DROP}
-              onClick={(a) => {
-                props.onMarkerClick(index);
-              }} />
-        </div>))}
+        <MarkerComponent
+          key={props.index}
+          place={place}
+          index={index}
+          onClick={props.onMarkerClick} /> ))
+      }
     </GoogleMap>
   }
 ))
 
 class Map extends Component {
   render() {
+    let map;
     if (this.props.places.length > 0) {
-      return (
+      map = (
         <div className='map-container'>
           <MapComponent
             isMarkerShown
@@ -39,8 +50,12 @@ class Map extends Component {
         </div>
       );
     } else {
-      return <div></div>
+      map = <div></div>
     }
+
+    console.log(markers);
+
+    return map;
   }
 }
 
