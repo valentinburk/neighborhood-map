@@ -50,9 +50,8 @@ class List extends Component {
     let filteredPlaces = this.getFilteredPlaces();
 
     return (
-      <div>
-        <div
-          className='heading'>
+      <div className='sidebar'>
+        <div className='heading'>
           <h1 className='title'>
             Places
           </h1>

@@ -10,6 +10,10 @@ body,
   font-family: 'Encode Sans', sans-serif;
 }
 
+.sidebar {
+  position: fixed;
+}
+
 .title {
   color: #fff;
   text-align: center;
@@ -57,6 +61,7 @@ body,
 
 .map-container {
   margin-left: 250px;
+  transition: 0.3s ease all;
 }
 
 .info-window {
