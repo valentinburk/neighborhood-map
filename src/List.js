@@ -50,16 +50,20 @@ class List extends Component {
     let filteredPlaces = this.getFilteredPlaces();
 
     return (
-      <div className='place-list'>
-        <h1 className='title'>
-          Palo Alto
-        </h1>
-        <input
-          className='filter-places'
-          type='text'
-          value={query}
-          onChange={event => this.updateQuery(event.target.value)}
-          placeholder='Filter places' />
+      <div>
+        <div
+          className='heading'>
+          <h1 className='title'>
+            Places
+          </h1>
+          <input
+            className='filter-places'
+            type='text'
+            value={query}
+            onChange={event => this.updateQuery(event.target.value)}
+            placeholder='Filter places' />
+        </div>
+        <div className='place-list'>
         <ol className='places'>
           {filteredPlaces.map((p, index) =>
             <li
@@ -70,6 +74,7 @@ class List extends Component {
             </li>
           )}
         </ol>
+      </div>
       </div>
     );
   }
