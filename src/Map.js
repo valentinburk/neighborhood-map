@@ -16,6 +16,7 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
     return <GoogleMap
       defaultZoom={10}
       defaultCenter={props.places[0]}
+      defaultOptions={{mapTypeControl: false}}
       onClick={props.hideInfoWindow}
       >
       {props.isMarkerShown && (props.places.map((place, index) =>
@@ -36,7 +37,9 @@ class Map extends Component {
     let map;
     if (this.props.places.length > 0) {
       map = (
-        <div className='map-container'>
+        <div
+          className='map-container'
+          style={{marginLeft: '250px'}}>
           <MapComponent
             isMarkerShown
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2eiZsx2oT_y03EA5ksk4zLCFq0mifCVM&v=3.exp&libraries=geometry,drawing,places"

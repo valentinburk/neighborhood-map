@@ -44,36 +44,52 @@ class List extends Component {
     return places.filter(p => match.test(p.name));
   }
 
+  handleSandwichClick = () => {
+    const map = document.querySelector('.map-container');
+    map.style.marginLeft = map.style.marginLeft === '250px' ? '0' : '250px';
+
+    const sandwich = document.querySelector('.sandwich');
+    sandwich.style.left = sandwich.style.left === '250px' ? '0' : '250px';
+  }
+
   render() {
     const { query } = this.state;
 
     let filteredPlaces = this.getFilteredPlaces();
 
     return (
-      <div className='sidebar'>
-        <div className='heading'>
-          <h1 className='title'>
-            Places
-          </h1>
-          <input
-            className='filter-places'
-            type='text'
-            value={query}
-            onChange={event => this.updateQuery(event.target.value)}
-            placeholder='Filter places' />
+      <div>
+        <div className='sidebar'>
+          <div className='heading'>
+            <h1 className='title'>
+              Places
+            </h1>
+            <input
+              className='filter-places'
+              type='text'
+              value={query}
+              onChange={event => this.updateQuery(event.target.value)}
+              placeholder='Filter places' />
+          </div>
+          <div className='place-list'>
+            <ol className='places'>
+              {filteredPlaces.map((p, index) =>
+                <li
+                  key={index}
+                  className='place'
+                  onClick={() => {this.props.onPlaceClick(index)}}>
+                    {p.name}
+                </li>
+              )}
+            </ol>
+          </div>
         </div>
-        <div className='place-list'>
-        <ol className='places'>
-          {filteredPlaces.map((p, index) =>
-            <li
-              key={index}
-              className='place'
-              onClick={() => {this.props.onPlaceClick(index)}}>
-                {p.name}
-            </li>
-          )}
-        </ol>
-      </div>
+        <p
+          style={{left: '250px'}}
+          className='sandwich'
+          onClick={this.handleSandwichClick}>
+          <img src='menu.png'/ >
+        </p>
       </div>
     );
   }
