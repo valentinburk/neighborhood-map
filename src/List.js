@@ -88,7 +88,9 @@ class List extends Component {
           style={{left: '250px'}}
           className='sandwich'
           onClick={this.handleSandwichClick}>
-          <img src='menu.png'/ >
+          <img
+            src='menu.png'
+            alt='Toggle menu' />
         </p>
       </div>
     );

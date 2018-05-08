@@ -21,6 +21,7 @@ class InfoWindow extends Component {
           <p className='info-rating'>Rating: {place.rating} ({place.likes.summary})</p>
           {place.bestPhoto && (
             <img
+              alt={place.name}
               src={`${place.bestPhoto.prefix}300x200${place.bestPhoto.suffix}`}
               onDragStart={event => event.preventDefault()}></img>
           )}
