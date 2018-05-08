@@ -1,5 +1,8 @@
 var CACHE_NAME = 'neighborhood-map-cache';
 
+/**
+ * Activation
+ */
 self.addEventListener("activate", event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -15,6 +18,9 @@ self.addEventListener("activate", event => {
   );
 });
 
+/**
+ * Installation
+ */
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -31,6 +37,9 @@ self.addEventListener('install', function(event) {
   );
 });
 
+/**
+ * Adding all fetches to cache and the retreiving data from cache
+ */
 self.addEventListener('fetch', function(event) {
   event.respondWith(caches.match(event.request).then(response => {
     if (response) {

@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
-const MarkerComponent = (props) => {
-  let marker = <Marker
-    position={props.place}
-    animation={props.animation}
-    onClick={() => {
-      props.onClick(props.index);
-    }} />
-
-  return marker;
-}
-
+/**
+ * Map component itself
+ */
 const MapComponent = withScriptjs(withGoogleMap(props => {
-    console.log(props);
     return <GoogleMap
       defaultZoom={10}
       defaultCenter={props.places.length > 0 ? props.places[0] : {lat: 37.4220, lng: -122.0841}}
@@ -21,18 +12,20 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
       onClick={props.hideInfoWindow}
       >
       {props.isMarkerShown && (props.places.map((place, index) =>
-        <MarkerComponent
+        <Marker
           key={index}
-          place={place}
+          position={place}
           animation={place.clicked ?
             window.google.maps.Animation.BOUNCE : 0}
-          index={index}
-          onClick={props.onMarkerClick} /> ))
+          onClick={() => {props.onMarkerClick(index)}} /> ))
       }
     </GoogleMap>
   }
 ))
 
+/**
+ * Map container with map component inside
+ */
 class Map extends Component {
   render() {
     return <div

@@ -15,17 +15,23 @@ class App extends Component {
     selectedPlace: null
   }
 
-  getInfo = (place) => {
-    return FOURSQUARE.venues.getVenue({
-      'venue_id': place.id
-    })
-  }
+  /**
+   * HANDLERS
+   */
 
-  setMarkers = (places) => {
+  /**
+   * Set markers all over the map according to
+   * passed places array
+   */
+  handleSetMarkers = (places) => {
     this.setState({ places });
   }
 
-  onMarkerClick = (marker) => {
+  /**
+   * Handles the click on markers
+   */
+  handleMarkerClick = (marker) => {
+    // 1. Update places and mark the clicked one
     const places = this.state.places.map((p, index) => {
       if (index === marker) {
         p.clicked = true;
@@ -35,13 +41,16 @@ class App extends Component {
       return p;
     });
 
+    // 2. Get info details from external provider
     this.getInfo(this.state.places[marker])
       .then(fsResponse => {
+        // Set state of the component
         this.setState({
           places: places,
           selectedPlace: fsResponse.response.venue
         });
 
+        // Lock focus on newly opened modal window
         document.querySelector('.info-window').focus();
       })
       .catch(error => {
@@ -50,15 +59,38 @@ class App extends Component {
       });
   }
 
-  hideInfoWindow = () => {
+  /**
+   * Hides the modal info window and
+   * mark all places not clicked
+   */
+  handleHidingInfoWindow = () => {
+    // Update places
     const places = this.state.places.map((p, index) => {
       p.clicked = false;
       return p;
     });
 
+    // Update component state
     this.setState({ places: places, selectedPlace: null });
   }
 
+  /**
+   * FUNCTIONS
+   */
+
+  /**
+   * Returns promise with FOURSQUARE response
+   */
+  getInfo = (place) => {
+    return FOURSQUARE.venues.getVenue({
+      'venue_id': place.id
+    })
+  }
+
+  /**
+   * Shows the error modal window for 3 seconds
+   * and then hide it
+   */
   showError = () => {
     const block = document.querySelector('.error');
     block.style.opacity = 1;
@@ -68,23 +100,24 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.places);
+    const placesInfo = this.state.places.map(v => {
+      return { lat: v.location.lat, lng: v.location.lng, clicked: v.clicked }
+    });
+
     return (
       <div className='app-container'>
         <List
           foursquare={FOURSQUARE}
-          setMarkers={this.setMarkers}
-          onPlaceClick={this.onMarkerClick} />
+          setMarkers={this.handleSetMarkers}
+          onPlaceClick={this.handleMarkerClick} />
         <Map
-          places={this.state.places.map(v => {
-            return { lat: v.location.lat, lng: v.location.lng, clicked: v.clicked }
-          })}
-          hideInfoWindow={this.hideInfoWindow}
-          onMarkerClick={this.onMarkerClick} />
-        <InfoWindow
+          places={placesInfo}
+          hideInfoWindow={this.handleHidingInfoWindow}
+          onMarkerClick={this.handleMarkerClick} />
+        {this.state.selectedPlace && (<InfoWindow
           place={this.state.selectedPlace}
           foursquare={FOURSQUARE}
-          hideInfoWindow={this.hideInfoWindow} />
+          hideInfoWindow={this.handleHidingInfoWindow} />)}
         <div
           style={{ opacity: 0 }}
           className='error'>Something went wrong</div>
