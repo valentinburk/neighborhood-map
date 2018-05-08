@@ -126,8 +126,15 @@ body,
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 15px 40px;
-  background: #eee;
+  background: #ff4040;
+  color: #fff;
   transition: 0.3s ease all;
+}
+
+.attribution {
+  font-size: small;
+  color: #9a9a9a;
+  text-align: right;
 }
 
 @media screen and (max-width: 600px) {

@@ -25,6 +25,9 @@ class InfoWindow extends Component {
             src={`${place.bestPhoto.prefix}300x200${place.bestPhoto.suffix}`}
             onDragStart={event => event.preventDefault()}></img>
         )}
+        <p className='attribution'>
+          Data provided by <a target='_blank' href='https://foursquare.com'>Foursquare</a>
+        </p>
       </article>
     </Draggable>
     )

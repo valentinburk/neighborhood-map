@@ -113,7 +113,9 @@ class App extends Component {
         <Map
           places={placesInfo}
           hideInfoWindow={this.handleHidingInfoWindow}
-          onMarkerClick={this.handleMarkerClick} />
+          onMarkerClick={this.handleMarkerClick}
+          onError={this.showError}
+           />
         {this.state.selectedPlace && (<InfoWindow
           place={this.state.selectedPlace}
           foursquare={FOURSQUARE}
