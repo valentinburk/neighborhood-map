@@ -36,6 +36,8 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
 class Map extends Component {
   render() {
     return <div
+      role="region"
+      aria-label='map'
       className='map-container'
       style={{marginLeft: '250px'}}>
       <MapComponent

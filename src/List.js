@@ -60,24 +60,32 @@ class List extends Component {
     return (
       <div>
         <div className='sidebar'>
-          <div className='heading'>
+          <div className='heading' role='heading'>
             <h1 className='title'>
               Places
             </h1>
             <input
+              tabIndex={1}
               className='filter-places'
               type='text'
               value={query}
               onChange={event => this.updateQuery(event.target.value)}
               placeholder='Filter places' />
           </div>
-          <div className='place-list'>
-            <ol className='places'>
+          <div className='place-list' role='region'>
+            <ol className='places' role='listbox' aria-label='List of places'>
               {filteredPlaces.map((p, index) =>
                 <li
+                  tabIndex={index + 2}
+                  role='option'
                   key={index}
                   className='place'
-                  onClick={() => {this.props.onPlaceClick(index)}}>
+                  onClick={() => {this.props.onPlaceClick(index)}}
+                  onKeyUp={event => {
+                    if (event.keyCode === 13) {
+                      this.props.onPlaceClick(index);
+                    }
+                  }}>
                     {p.name}
                 </li>
               )}
@@ -85,6 +93,7 @@ class List extends Component {
           </div>
         </div>
         <p
+          tabIndex='-1'
           style={{left: '250px'}}
           className='sandwich'
           onClick={this.handleSandwichClick}>

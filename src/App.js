@@ -41,6 +41,8 @@ class App extends Component {
           places: places,
           selectedPlace: fsResponse.response.venue
         });
+
+        document.querySelector('.info-window').focus();
       })
       .catch(error => {
         this.showError();

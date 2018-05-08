@@ -11,7 +11,7 @@ class InfoWindow extends Component {
       console.log(place);
       return (
       <Draggable>
-        <div className='info-window'>
+        <article className='info-window' role='article' tabIndex='1'>
           <h2 className='info-name'>{place.name}</h2>
           <p
             onClick={() => {this.props.hideInfoWindow()}}
@@ -21,11 +21,12 @@ class InfoWindow extends Component {
           <p className='info-rating'>Rating: {place.rating} ({place.likes.summary})</p>
           {place.bestPhoto && (
             <img
+              arial-label={place.name}
               alt={place.name}
               src={`${place.bestPhoto.prefix}300x200${place.bestPhoto.suffix}`}
               onDragStart={event => event.preventDefault()}></img>
           )}
-        </div>
+        </article>
       </Draggable>
       )
     }
