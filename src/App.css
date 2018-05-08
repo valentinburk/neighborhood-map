@@ -80,8 +80,8 @@ body,
 
 .info-window {
   position: absolute;
-  right: 100px;
-  bottom: 50px;
+  right: 0;
+  bottom: 0;
   transform: translate(150px, 0);
   width: 300px;
   background: rgb(255, 255, 255);
@@ -120,6 +120,13 @@ body,
   margin-bottom: 10px;
 }
 
-.info-close {
+@media screen and (max-width: 600px) {
+  .sandwich {
+    padding: 25px 20px;
+  }
 
+  .info-window,
+  .info-window img {
+    width: 250px;
+  }
 }
