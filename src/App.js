@@ -41,6 +41,10 @@ class App extends Component {
           places: places,
           selectedPlace: fsResponse.response.venue
         });
+      })
+      .catch(error => {
+        this.showError();
+        console.log(error);
       });
   }
 
@@ -51,6 +55,14 @@ class App extends Component {
     });
 
     this.setState({ places: places, selectedPlace: null });
+  }
+
+  showError = () => {
+    const block = document.querySelector('.error');
+    block.style.opacity = 1;
+    setTimeout(() => {
+      block.style.opacity = 0;
+    }, 3000);
   }
 
   render() {
@@ -71,6 +83,9 @@ class App extends Component {
           place={this.state.selectedPlace}
           foursquare={FOURSQUARE}
           hideInfoWindow={this.hideInfoWindow} />
+        <div
+          style={{ opacity: 0 }}
+          className='error'>Something went wrong</div>
       </div>
     );
   }

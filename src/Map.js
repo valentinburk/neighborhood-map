@@ -20,7 +20,7 @@ const MapComponent = withScriptjs(withGoogleMap(props => {
       defaultOptions={{mapTypeControl: false}}
       onClick={props.hideInfoWindow}
       >
-      {props.isMarkerShown && props.places.length > 0 && (props.places.map((place, index) =>
+      {props.isMarkerShown && (props.places.map((place, index) =>
         <MarkerComponent
           key={index}
           place={place}
