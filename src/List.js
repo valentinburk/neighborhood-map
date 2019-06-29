@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import escapeRegExp from 'escape-string-regexp';
 
-Geocode.setApiKey('AIzaSyC2eiZsx2oT_y03EA5ksk4zLCFq0mifCVM');
+Geocode.setApiKey('GOOGLE_MAPS_API_KEY');
 
 class List extends Component {
   state = {
